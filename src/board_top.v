@@ -35,7 +35,7 @@ module board_top(
     output wire [5:0]   sec     ,
     output wire [5:0]   min     ,
     output wire [5:0]   hour    ,
-    output              ctl_mode,
+    output wire         ctl_mode,
     output wire [1:0]   ctl_time
     );
 
