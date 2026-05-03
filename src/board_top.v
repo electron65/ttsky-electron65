@@ -146,25 +146,23 @@ endmodule
 
 
 module debounce #(
-    parameter NUM_DEB = 10
+    parameter NUM_DEB = 12
 )(
-    input           clk     ,
-    input           nrst    ,
-    input           x       ,
-    output wire     y       
+    input clk,
+    input nrst,
+    input x,
+    output wire y
 );
 
-reg [NUM_DEB - 1 : 0] DEB;
+reg [NUM_DEB-1:0] DEB;
 
-    always @(posedge clk or negedge nrst) begin
-        if(!nrst) begin
-            DEB    <= {NUM_DEB{1'b0}};
-        end
-        else begin
-            DEB <= {DEB[NUM_DEB - 2 : 0], x}; 
-        end
-    end
+always @(posedge clk or negedge nrst) begin
+    if(!nrst)
+        DEB <= {NUM_DEB{x}};
+    else
+        DEB <= {DEB[NUM_DEB-2:0], x};
+end
 
-    assign y = (&DEB);
+assign y = &DEB;
 
 endmodule
